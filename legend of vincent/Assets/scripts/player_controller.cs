@@ -71,11 +71,6 @@ public class player_controller : MonoBehaviour
 
         // Jump movement
         if (Input.GetButtonDown("Jump") && isGrounded){
-            Debug.Log(jumpHeight);
-            Debug.Log(-2f);
-            Debug.Log(gravity);
-            Debug.Log(jumpHeight * -2f * gravity);
-
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
