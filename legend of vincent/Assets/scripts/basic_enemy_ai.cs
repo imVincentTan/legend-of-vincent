@@ -6,6 +6,7 @@ using UnityEngine;
 public class basic_enemy_ai : MonoBehaviour
 {
 
+    public player_controller playerhealth;
     public UnityEngine.AI.NavMeshAgent agent;
     public Transform player;
     public LayerMask groundLayerMask, playerLayerMask;
@@ -17,12 +18,15 @@ public class basic_enemy_ai : MonoBehaviour
 
     // attacking
     public float attackCooldown;
-    bool attacked;
+    public float attackCooldownFinish;
+    bool canAttack = true;
 
     // state
     public float sightRange,attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    // stats
+    public float attackPower = 5f;
 
 
 
@@ -69,13 +73,20 @@ public class basic_enemy_ai : MonoBehaviour
     }
 
     private void AttackPlayer(){
-        agent.SetDestination(transform.position);
-        print("attack!!!");
-        transform.LookAt(player);
-
-        if(!attacked){
+        
+        if(canAttack){
             // attack
-            attacked = true;
+            agent.SetDestination(transform.position);
+            transform.LookAt(player);
+            print("attack!!!");
+            playerhealth.takeDamage(attackPower);
+            canAttack = false;
+            attackCooldownFinish = Time.time + attackCooldown;
+        }else if(Time.time > attackCooldownFinish){
+            canAttack = true;
         }
     }
+
+    
+
 }
