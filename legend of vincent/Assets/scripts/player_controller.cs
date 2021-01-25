@@ -40,7 +40,7 @@ public class player_controller : MonoBehaviour
     float dashCooldown = 5f;
     float dashCooldownOver = 0f;
     float dashSpeed = 200f;
-    public GameObject camera;
+    public GameObject playerCamera;
 
     // HUD 
     public GameObject healthAmount;
@@ -148,7 +148,7 @@ public class player_controller : MonoBehaviour
 
     private void HandleCharacterMovement(){
         if(inDash){
-            controller.Move(camera.transform.forward * dashSpeed * Time.deltaTime);
+            controller.Move(playerCamera.transform.forward * dashSpeed * Time.deltaTime);
             if(Time.time > dashOver){
                 inDash = false;
                 dashCooldownOver = Time.time + dashCooldown;

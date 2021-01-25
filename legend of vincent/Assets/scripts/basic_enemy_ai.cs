@@ -28,9 +28,6 @@ public class basic_enemy_ai : MonoBehaviour
     // stats
     public float attackPower = 5f;
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -41,19 +38,26 @@ public class basic_enemy_ai : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         playerInSightRange = Physics.CheckSphere(transform.position,sightRange,playerLayerMask);
         playerInAttackRange = Physics.CheckSphere(transform.position,attackRange,playerLayerMask);
+        
 
-        if(!playerInSightRange) Patrolling();
-        if(playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if(playerInAttackRange) AttackPlayer();
+        if (playerInAttackRange){
+            AttackPlayer();
+        }else if(playerInSightRange){
+            ChasePlayer();
+        }else{
+            Patrolling();
+        }
     }
 
     private void Patrolling(){
+        
         if(!destinationPointSet) GetDestinationPoint();
         if(destinationPointSet) agent.SetDestination(destinationPoint);
 
-        Vector3 distanceToDestinationPoint = transform.position - destinationPoint;
+        Vector3 distanceToDestinationPoint = destinationPoint - transform.position;
 
         if (distanceToDestinationPoint.magnitude < 1f) destinationPointSet = false;
 
@@ -65,7 +69,13 @@ public class basic_enemy_ai : MonoBehaviour
 
         destinationPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomz);
 
-        if (Physics.Raycast(destinationPoint, -transform.up, 2f, groundLayerMask)) destinationPointSet = true;
+        if (Physics.Raycast(destinationPoint, -transform.up, 2f, groundLayerMask)){
+            
+            destinationPointSet = true;
+        }else{
+            
+            GetDestinationPoint();
+        }
     }
 
     private void ChasePlayer(){
@@ -75,6 +85,7 @@ public class basic_enemy_ai : MonoBehaviour
     private void AttackPlayer(){
         
         if(canAttack){
+            
             // attack
             agent.SetDestination(transform.position);
             transform.LookAt(player);

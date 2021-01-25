@@ -1,5 +1,113 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &8560335025179971773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307711020714363343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 1353758767285641272}
+  - {fileID: 173794634679235954}
+  - {fileID: 8404434943227382445}
+  - {fileID: 2449501756607285267}
+  - {fileID: 1611113921369092594}
+  - {fileID: 3428337444705107898}
+  - {fileID: 3643470021117271005}
+  - {fileID: 6158843184623039794}
+  - {fileID: 8536404973725020518}
+  - {fileID: 7663843252345235617}
+  - {fileID: 3605474039888395071}
+  - {fileID: 1869368964721009173}
+  - {fileID: 7847855217465284583}
+  - {fileID: 6161429911737480049}
+  - {fileID: 4015887607484318159}
+  - {fileID: 8543516346298146156}
+  - {fileID: 8890778339854030894}
+  - {fileID: 7667908071129235515}
+  - {fileID: 5447631672922397617}
+  - {fileID: 2145804074377431472}
+  - {fileID: 8068327817269369859}
+  - {fileID: 8161894133862281495}
+  - {fileID: 7723466117571268582}
+  - {fileID: 8568875358505859598}
+  - {fileID: 2640252105001186799}
+  - {fileID: 1217042997783005885}
+  - {fileID: 649915203242804575}
+  - {fileID: 7900824968172537034}
+  - {fileID: 2011327217804222952}
+  - {fileID: 1175491397872522131}
+  - {fileID: 1729956906634941138}
+  - {fileID: 6420040089180308455}
+  - {fileID: 4411510765455096352}
+  - {fileID: 9105292539778888544}
+  - {fileID: 2301822114300958836}
+  - {fileID: 6775434498569510568}
+  - {fileID: 6278951357413572325}
+  - {fileID: 3957177458184256725}
+  - {fileID: 8197350944840817348}
+  - {fileID: 6402870063240820851}
+  - {fileID: 4395676330676526797}
+  - {fileID: 8416967332200278080}
+  - {fileID: 4470546967891520541}
+  - {fileID: 4620467806412595497}
+  - {fileID: 7685983582520002214}
+  - {fileID: 4703824102839913621}
+  - {fileID: 7103540546865193789}
+  - {fileID: 7680256968551662697}
+  - {fileID: 5402241109869039081}
+  - {fileID: 8653643094195662379}
+  - {fileID: 6239305760281281369}
+  - {fileID: 2053522755655094469}
+  - {fileID: 4259946070767643285}
+  - {fileID: 2469662033057789590}
+  - {fileID: 2933943003898538035}
+  - {fileID: 3592467581686772943}
+  - {fileID: 1459174117839033656}
+  - {fileID: 7643140631975931380}
+  - {fileID: 8577311918301447626}
+  - {fileID: 3399106830662191518}
+  - {fileID: 153419742873348653}
+  - {fileID: 3627744053274160881}
+  - {fileID: 6350456525615997954}
+  - {fileID: 3104687649737104265}
+  - {fileID: 3916624087436880276}
+--- !u!114 &8560335023952372447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559410253771455224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7285e95aca327c4da8eee8810c202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 6
+  range: 100
+  fpsCam: {fileID: 8560335023998679303}
+  enemymask:
+    serializedVersion: 2
+    m_Bits: 512
+  maxBullets: 12
+  currentBullets: 12
+  reloadTime: 5
+  reloadFinish: 0
+  reloading: 0
+  bulletAmount: {fileID: 8560335025565682156}
 --- !u!1 &8560335023927006156
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,30 +241,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8560335023952372447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8559410253771455224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7285e95aca327c4da8eee8810c202a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 6
-  range: 100
-  fpsCam: {fileID: 8560335023998679303}
-  enemymask:
-    serializedVersion: 2
-    m_Bits: 512
-  maxBullets: 12
-  currentBullets: 12
-  reloadTime: 5
-  reloadFinish: 0
-  reloading: 0
-  bulletAmount: {fileID: 8560335025565682156}
 --- !u!1 &8560335023994299746
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +314,7 @@ MonoBehaviour:
   groundDistance: 0.4
   jumpHeight: 5
   jumpCheckDelay: 0.2
-  camera: {fileID: 8560335023998679298}
+  playerCamera: {fileID: 8560335023998679298}
   healthAmount: {fileID: 8560335025087355336}
   time_slow_cover: {fileID: 8560335025262684981}
   shield_cover: {fileID: 8560335025219134666}
@@ -265,7 +349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560335023998679298}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8564832678336388390}
@@ -797,90 +881,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8560335025179971773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3307711020714363343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneShape: 1
-  drawBones: 1
-  drawTripods: 0
-  boneSize: 1
-  tripodSize: 1
-  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
-  m_Transforms:
-  - {fileID: 1353758767285641272}
-  - {fileID: 173794634679235954}
-  - {fileID: 8404434943227382445}
-  - {fileID: 2449501756607285267}
-  - {fileID: 1611113921369092594}
-  - {fileID: 3428337444705107898}
-  - {fileID: 3643470021117271005}
-  - {fileID: 6158843184623039794}
-  - {fileID: 8536404973725020518}
-  - {fileID: 7663843252345235617}
-  - {fileID: 3605474039888395071}
-  - {fileID: 1869368964721009173}
-  - {fileID: 7847855217465284583}
-  - {fileID: 6161429911737480049}
-  - {fileID: 4015887607484318159}
-  - {fileID: 8543516346298146156}
-  - {fileID: 8890778339854030894}
-  - {fileID: 7667908071129235515}
-  - {fileID: 5447631672922397617}
-  - {fileID: 2145804074377431472}
-  - {fileID: 8068327817269369859}
-  - {fileID: 8161894133862281495}
-  - {fileID: 7723466117571268582}
-  - {fileID: 8568875358505859598}
-  - {fileID: 2640252105001186799}
-  - {fileID: 1217042997783005885}
-  - {fileID: 649915203242804575}
-  - {fileID: 7900824968172537034}
-  - {fileID: 2011327217804222952}
-  - {fileID: 1175491397872522131}
-  - {fileID: 1729956906634941138}
-  - {fileID: 6420040089180308455}
-  - {fileID: 4411510765455096352}
-  - {fileID: 9105292539778888544}
-  - {fileID: 2301822114300958836}
-  - {fileID: 6775434498569510568}
-  - {fileID: 6278951357413572325}
-  - {fileID: 3957177458184256725}
-  - {fileID: 8197350944840817348}
-  - {fileID: 6402870063240820851}
-  - {fileID: 4395676330676526797}
-  - {fileID: 8416967332200278080}
-  - {fileID: 4470546967891520541}
-  - {fileID: 4620467806412595497}
-  - {fileID: 7685983582520002214}
-  - {fileID: 4703824102839913621}
-  - {fileID: 7103540546865193789}
-  - {fileID: 7680256968551662697}
-  - {fileID: 5402241109869039081}
-  - {fileID: 8653643094195662379}
-  - {fileID: 6239305760281281369}
-  - {fileID: 2053522755655094469}
-  - {fileID: 4259946070767643285}
-  - {fileID: 2469662033057789590}
-  - {fileID: 2933943003898538035}
-  - {fileID: 3592467581686772943}
-  - {fileID: 1459174117839033656}
-  - {fileID: 7643140631975931380}
-  - {fileID: 8577311918301447626}
-  - {fileID: 3399106830662191518}
-  - {fileID: 153419742873348653}
-  - {fileID: 3627744053274160881}
-  - {fileID: 6350456525615997954}
-  - {fileID: 3104687649737104265}
-  - {fileID: 3916624087436880276}
 --- !u!1 &8560335025219134676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560335025901943999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8560335023994299745}
