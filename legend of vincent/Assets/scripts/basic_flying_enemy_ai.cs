@@ -11,14 +11,14 @@ public class basic_flying_enemy_ai : MonoBehaviour
 
     // patrolling
     public Vector3 destinationPoint;
-    bool destinationPointSet;
-    bool kitingPointSet;
+    private bool destinationPointSet;
+    private bool kitingPointSet;
     public float destinationPointRange;
 
     // attacking
     public float attackCooldown;
     public float attackCooldownFinish;
-    bool canAttack = true;
+    private bool canAttack = true;
 
     public GameObject bulletPrefab;
     public float projectileSpeed;
@@ -28,7 +28,7 @@ public class basic_flying_enemy_ai : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     // stats
-    public float attackPower = 5f;
+    public float attackPower = 3f;
     public float minHeight = 3f;
     public float maxHeight = 5f; 
 
@@ -37,6 +37,8 @@ public class basic_flying_enemy_ai : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+
     }
 
     // Update is called once per frame
@@ -74,7 +76,7 @@ public class basic_flying_enemy_ai : MonoBehaviour
 
         destinationPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomz);
 
-        if (Physics.Raycast(destinationPoint, -transform.up, 50f, groundLayerMask)){
+        if (Physics.Raycast(destinationPoint, -transform.up, 200f, groundLayerMask)){
             destinationPointSet = true;
         }else{
             // should almost never go here
@@ -99,7 +101,7 @@ public class basic_flying_enemy_ai : MonoBehaviour
             GameObject chickenBullet = Instantiate(bulletPrefab, new Vector3(0,0,0), Quaternion.identity);
             
             EnemyProjectile projectile = chickenBullet.GetComponent<EnemyProjectile>();
-            projectile.setStraightProjectile(projectileSpeed, gameObject.transform, player);
+            projectile.setStraightProjectile(projectileSpeed, gameObject.transform, player, attackPower);
 
             // playerhealth.takeDamage(attackPower);
             canAttack = false;

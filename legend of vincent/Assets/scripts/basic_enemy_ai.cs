@@ -8,7 +8,7 @@ public class basic_enemy_ai : MonoBehaviour
 
     public player_controller playerhealth;
     public UnityEngine.AI.NavMeshAgent agent;
-    public Transform player;
+    private Transform player;
     public LayerMask groundLayerMask, playerLayerMask;
 
     // patrolling
@@ -33,6 +33,12 @@ public class basic_enemy_ai : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        playerhealth = GameObject.Find("Player").GetComponent<player_controller>();
+
+        print(gameObject.transform.position.y);
+        Vector3 temp = gameObject.transform.position;
+        temp.y = 53;
+        gameObject.transform.position = temp;
     }
 
     // Update is called once per frame
@@ -69,7 +75,7 @@ public class basic_enemy_ai : MonoBehaviour
 
         destinationPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomz);
 
-        if (Physics.Raycast(destinationPoint, -transform.up, 2f, groundLayerMask)){
+        if (Physics.Raycast(destinationPoint, -transform.up, 200f, groundLayerMask)){
             
             destinationPointSet = true;
         }else{
@@ -89,7 +95,6 @@ public class basic_enemy_ai : MonoBehaviour
             // attack
             agent.SetDestination(transform.position);
             transform.LookAt(player);
-            print("attack!!!");
             playerhealth.takeDamage(attackPower);
             canAttack = false;
             attackCooldownFinish = Time.time + attackCooldown;

@@ -75,7 +75,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerhealth: {fileID: 0}
   agent: {fileID: 8853766855945603122}
-  player: {fileID: 0}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -90,7 +89,7 @@ MonoBehaviour:
   attackRange: 3
   playerInSightRange: 0
   playerInAttackRange: 0
-  attackPower: 5
+  attackPower: 3
 --- !u!195 &8853766855945603122
 NavMeshAgent:
   m_ObjectHideFlags: 0
