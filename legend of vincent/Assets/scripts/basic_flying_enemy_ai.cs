@@ -32,23 +32,25 @@ public class basic_flying_enemy_ai : MonoBehaviour
     public float minHeight = 3f;
     public float maxHeight = 5f; 
 
+    // misc
+    private int failcount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         playerInSightRange = Physics.CheckSphere(transform.position,sightRange,playerLayerMask);
         playerInAttackRange = Physics.CheckSphere(transform.position,attackRange,playerLayerMask);
         
-
+        
         if (playerInAttackRange){
             AttackPlayer();
         }else if(playerInSightRange){
@@ -56,12 +58,26 @@ public class basic_flying_enemy_ai : MonoBehaviour
         }else{
             Patrolling();
         }
+        
+        
     }
 
     private void Patrolling(){
-        
+
         if(!destinationPointSet) GetDestinationPoint();
-        if(destinationPointSet) agent.SetDestination(destinationPoint);
+        if(destinationPointSet){
+            if(failcount > 3){
+                print("boop bad object terminated");
+                Destroy(gameObject);
+            }
+            if(!agent.SetDestination(destinationPoint)){
+                failcount += 1;
+                GetDestinationPoint();
+            }else{
+                failcount = 0;
+            }
+        }
+        
 
         Vector3 distanceToDestinationPoint = destinationPoint - transform.position;
 

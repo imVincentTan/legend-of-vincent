@@ -13,27 +13,55 @@ public class gun : MonoBehaviour
     public float reloadTime = 0.5f;
     public float reloadFinish = 0f;
     public bool reloading = false;
+    public float shootCooldown = 0.1f;
+    private float lastShot = 0f;
 
     // HUD 
     public GameObject bulletAmount;
 
+    // audio
+    public AudioSource audioSource;
+    public AudioClip biuSound;
+
+    // animation
+    public Animator anim;
+
+    // pause game 
+    public PauseMenuController pauseMenuController;
+
+
+    // Start is called before the first frame update
+    void Start(){
+        anim = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // shooting
-        if (Input.GetButtonDown("Fire1")) Shoot();
+        if(!pauseMenuController.gamePaused){
+            // shooting
+            if (Input.GetButton("Fire1")){
+                Shoot();
+            }else if (Input.GetButton("Reload")){
+                Reload();
+            }
 
-        // check if reloading done
-        if(reloading && Time.time > reloadFinish){
-            reloading = false;
-            currentBullets = maxBullets;
-            bulletAmount.GetComponent<UnityEngine.UI.Text>().text = currentBullets.ToString();
+            // check if reloading done
+            if(reloading && Time.time > reloadFinish){
+                reloading = false;
+                currentBullets = maxBullets;
+                bulletAmount.GetComponent<UnityEngine.UI.Text>().text = currentBullets.ToString();
+            }
         }
     }
 
     void Shoot(){
-        if(!reloading){
-            print("pew");
+        if(!reloading && (Time.time >= lastShot + shootCooldown)){
+            
+            anim.Play("gun_shoot",-1,0f);
+            audioSource.PlayOneShot(biuSound);
+            lastShot = Time.time;
+
             RaycastHit hit;
             if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)){
                 Debug.Log(hit.transform.name);
@@ -44,16 +72,18 @@ public class gun : MonoBehaviour
             currentBullets -= 1;
 
             if (currentBullets <= 0){
-            
-            reloading = true;
-            bulletAmount.GetComponent<UnityEngine.UI.Text>().text = "Reloading...";
-            reloadFinish = Time.time + reloadTime;
+                Reload();
 
             }else{
                 bulletAmount.GetComponent<UnityEngine.UI.Text>().text = currentBullets.ToString();
-            }
-        }
+            }    
+        }   
+    }
 
-                
+    void Reload(){
+        anim.Play("gun_reload",-1,0f);
+        reloading = true;
+        bulletAmount.GetComponent<UnityEngine.UI.Text>().text = "Reloading...";
+        reloadFinish = Time.time + reloadTime;
     }
 }

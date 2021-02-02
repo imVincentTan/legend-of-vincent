@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7374730696a9b50408591b75b4251259
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Charlemagne
+  fontNames:
+  - Charlemagne
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e0e5b04bf9648bf4286568a5ac0878ed, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

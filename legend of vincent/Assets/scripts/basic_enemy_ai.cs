@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class basic_enemy_ai : MonoBehaviour
 {
-
     public player_controller playerhealth;
     public UnityEngine.AI.NavMeshAgent agent;
     private Transform player;
@@ -28,6 +27,8 @@ public class basic_enemy_ai : MonoBehaviour
     // stats
     public float attackPower = 5f;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +36,6 @@ public class basic_enemy_ai : MonoBehaviour
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         playerhealth = GameObject.Find("Player").GetComponent<player_controller>();
 
-        print(gameObject.transform.position.y);
         Vector3 temp = gameObject.transform.position;
         temp.y = 53;
         gameObject.transform.position = temp;
@@ -44,18 +44,23 @@ public class basic_enemy_ai : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         playerInSightRange = Physics.CheckSphere(transform.position,sightRange,playerLayerMask);
         playerInAttackRange = Physics.CheckSphere(transform.position,attackRange,playerLayerMask);
         
-
-        if (playerInAttackRange){
-            AttackPlayer();
-        }else if(playerInSightRange){
-            ChasePlayer();
-        }else{
-            Patrolling();
+        try{
+            if (playerInAttackRange){
+                AttackPlayer();
+            }else if(playerInSightRange){
+                ChasePlayer();
+            }else{
+                Patrolling();
+            }    
+        }catch{
+            print("does it ever go here? find out next time on...");
+            Destroy(gameObject);
         }
+
+        
     }
 
     private void Patrolling(){

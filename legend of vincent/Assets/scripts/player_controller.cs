@@ -50,7 +50,15 @@ public class player_controller : MonoBehaviour
     public TMP_Text time_slow_counter;
     public TMP_Text shield_counter;
     public TMP_Text dash_counter;
+
+    // audio
+    public AudioSource audioSource;
+    public AudioClip aiyaSound;
+    public AudioClip oohSound;
+    public AudioClip ouchSound;
     
+    // pause game 
+    public PauseMenuController pauseMenuController;
     
 
     // Start is called before the first frame update
@@ -62,73 +70,74 @@ public class player_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // check if the player dies from Y position (out of world)
+        
+        if(!pauseMenuController.gamePaused){
+            // check if the player dies from Y position (out of world)
 
-        // cooldowns
-        if (timeSlowed && Time.time > unTimeSlowTime){
-            Time.timeScale = 1f;
-            Time.fixedDeltaTime = 1f;
-            timeSlowCooldownOver = Time.time + timeSlowCooldown;
-            timeSlowed = false;
+            // cooldowns
+            if (timeSlowed && Time.time > unTimeSlowTime){
+                Time.timeScale = 1f;
+                timeSlowCooldownOver = Time.time + timeSlowCooldown;
+                timeSlowed = false;
+            }
+
+            if(shieldDown && Time.time > shieldCooldownOver){
+                shieldDown = false;
+            }
+
+            if(!inDash && Time.time > dashCooldownOver){
+                canDash = true;
+            }
+
+            // cooldown UIs
+            if (!timeSlowed && Time.time > timeSlowCooldownOver){
+                time_slow_cover.fillAmount = 0f;
+                time_slow_counter.gameObject.SetActive(false);
+            }else if(timeSlowed){
+                time_slow_cover.fillAmount = 1f;
+                time_slow_counter.gameObject.SetActive(false);
+            }else{
+                time_slow_cover.fillAmount = (timeSlowCooldownOver-Time.time)/timeSlowCooldown;
+                time_slow_counter.gameObject.SetActive(true);
+                time_slow_counter.text = Mathf.RoundToInt(timeSlowCooldownOver-Time.time).ToString();
+            }
+
+            if(!shieldDown){
+                shield_cover.fillAmount = 0f;
+                shield_counter.gameObject.SetActive(false);
+            }else{
+                shield_cover.fillAmount = (shieldCooldownOver-Time.time)/shieldCooldown;
+                shield_counter.gameObject.SetActive(true);
+                shield_counter.text = Mathf.RoundToInt(shieldCooldownOver-Time.time).ToString();
+
+            }
+
+            if(canDash){
+                dash_cover.fillAmount = 0f;
+                dash_counter.gameObject.SetActive(false);
+            }else if(inDash){
+                dash_cover.fillAmount = 1f;
+                dash_counter.gameObject.SetActive(false);
+            }else{
+                dash_cover.fillAmount = (dashCooldownOver-Time.time)/dashCooldown;
+                dash_counter.gameObject.SetActive(true);
+                dash_counter.text = Mathf.RoundToInt(dashCooldownOver-Time.time).ToString();
+            }
+
+
+
+            // GroundCheck
+            GroundCheck();
+
+            // character movement
+            HandleCharacterMovement();
+
+            // character abilities
+            HandleCharacterAbility();
         }
-
-        if(shieldDown && Time.time > shieldCooldownOver){
-            shieldDown = false;
-        }
-
-        if(!inDash && Time.time > dashCooldownOver){
-            canDash = true;
-        }
-
-        // cooldown UIs
-        if (!timeSlowed && Time.time > timeSlowCooldownOver){
-            time_slow_cover.fillAmount = 0f;
-            time_slow_counter.gameObject.SetActive(false);
-        }else if(timeSlowed){
-            time_slow_cover.fillAmount = 1f;
-            time_slow_counter.gameObject.SetActive(false);
-        }else{
-            time_slow_cover.fillAmount = (timeSlowCooldownOver-Time.time)/timeSlowCooldown;
-            time_slow_counter.gameObject.SetActive(true);
-            time_slow_counter.text = Mathf.RoundToInt(timeSlowCooldownOver-Time.time).ToString();
-        }
-
-        if(!shieldDown){
-            shield_cover.fillAmount = 0f;
-            shield_counter.gameObject.SetActive(false);
-        }else{
-            shield_cover.fillAmount = (shieldCooldownOver-Time.time)/shieldCooldown;
-            shield_counter.gameObject.SetActive(true);
-            shield_counter.text = Mathf.RoundToInt(shieldCooldownOver-Time.time).ToString();
-
-        }
-
-        if(canDash){
-            dash_cover.fillAmount = 0f;
-            dash_counter.gameObject.SetActive(false);
-        }else if(inDash){
-            dash_cover.fillAmount = 1f;
-            dash_counter.gameObject.SetActive(false);
-        }else{
-            dash_cover.fillAmount = (dashCooldownOver-Time.time)/dashCooldown;
-            dash_counter.gameObject.SetActive(true);
-            dash_counter.text = Mathf.RoundToInt(dashCooldownOver-Time.time).ToString();
-        }
-
-
-
-        // GroundCheck
-        GroundCheck();
-
-        // character movement
-        HandleCharacterMovement();
-
-        // character abilities
-        HandleCharacterAbility();
+        
         
 
-
-        
         
     }
 
@@ -181,10 +190,21 @@ public class player_controller : MonoBehaviour
         if(shieldDown){
             health -= damageTaken;
             healthAmount.GetComponent<Text>().text = health.ToString();
+            
+            int temp = Random.Range(0,3);
+            if(temp == 0){
+                audioSource.PlayOneShot(aiyaSound);
+            }else if(temp == 1){
+                audioSource.PlayOneShot(oohSound);
+            }else if(temp == 2){
+                audioSource.PlayOneShot(ouchSound);
+            }
+
             if(health <= 0) die();
+
         }else{
             shieldDown = true;
-            shieldCooldownOver = Time.time + shieldCooldown;
+            shieldCooldownOver = Time.time + shieldCooldown;            
         }
         
     }
@@ -205,13 +225,11 @@ public class player_controller : MonoBehaviour
                 dashOver = Time.time + dashTime;
             }
         }
-
     }
 
     private void timeSlow(){
         if (!timeSlowed && Time.time > timeSlowCooldownOver){
             Time.timeScale = 0.5f;
-            Time.fixedDeltaTime = 0.5f;
             unTimeSlowTime = Time.time + timeSlowDuration;
             timeSlowed = true;
         }
