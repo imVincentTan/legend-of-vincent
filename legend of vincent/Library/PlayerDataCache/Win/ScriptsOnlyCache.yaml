@@ -1,7 +1,5 @@
 ScriptsOnlyBuild:
   usedScripts:
-    Assembly-CSharp-Editor.dll:
-    - ReadmeEditor
     Assembly-CSharp.dll:
     - BasicHealthBar
     - CollectableAggregateController
@@ -12,7 +10,6 @@ ScriptsOnlyBuild:
     - MainMenuController
     - PauseMenuController
     - ProjectileCollisionHandler
-    - Readme
     - basic_enemy_ai
     - basic_flying_enemy_ai
     - basic_ranged_enemy_ai
@@ -1443,5 +1440,5 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenuScene.unity
   - Assets/Scenes/GameScene.unity
-  playerPath: C:/Users/Vincent/Desktop/project/legend-of-vincent/Builds/legend of
-    vincent.exe
+  playerPath: C:/Users/Vincent/Desktop/project/legend-of-vincent/Builds/build_1.1/legend
+    of vincent.exe

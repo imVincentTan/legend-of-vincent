@@ -47,6 +47,7 @@ public class target : MonoBehaviour
         if(isFinalBoss){
             pauseMenuController.gameOver = true;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             winGameDialogue.SetActive(true);
             Time.timeScale = 0f;
 
