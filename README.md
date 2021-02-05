@@ -2,6 +2,7 @@
 a single player game where the player saves the world by defeating the Giant Chicken!
 
 Controls:
+
 Left Mouse Click - shoot
 
 WASD - move
