@@ -16,6 +16,7 @@ public class player_controller : MonoBehaviour
 
     public float jumpHeight = 2f;
     public float jumpCheckDelay = 0.2f;
+    public bool canJump = true;
 
     Vector3 velocity;
     bool isGrounded = true;
@@ -59,6 +60,12 @@ public class player_controller : MonoBehaviour
     
     // pause game 
     public PauseMenuController pauseMenuController;
+
+    public GameObject dieScreen;
+    public bool diedAlready = false;
+
+
+
     
 
     // Start is called before the first frame update
@@ -71,8 +78,7 @@ public class player_controller : MonoBehaviour
     void Update()
     {
         
-        if(!pauseMenuController.gamePaused){
-            // check if the player dies from Y position (out of world)
+        if(!pauseMenuController.gamePaused && !pauseMenuController.gameOver){
 
             // cooldowns
             if (timeSlowed && Time.time > unTimeSlowTime){
@@ -147,10 +153,10 @@ public class player_controller : MonoBehaviour
         // only check if there has been enough time since last jump
         if (Time.time >= lastTimeJumped + jumpCheckDelay){
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
-
+            if (isGrounded) canJump = true;
             if (isGrounded && velocity.y < 0){
                 
-                velocity.y = -2f;
+                velocity.y = -20f;
             }
         }
     }
@@ -173,11 +179,13 @@ public class player_controller : MonoBehaviour
             controller.Move(move * speed * Time.deltaTime);
 
             // Jump movement
-            if (Input.GetButtonDown("Jump")){
+            if (Input.GetButtonDown("Jump") && canJump){
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                lastTimeJumped = Time.time;
+                canJump = false;
             }
 
-            lastTimeJumped = Time.time;
+            
 
             velocity.y += gravity * Time.deltaTime;
 
@@ -200,8 +208,10 @@ public class player_controller : MonoBehaviour
                 audioSource.PlayOneShot(ouchSound);
             }
 
-            if(health <= 0) die();
-
+            if(!diedAlready && health <= 0){
+                diedAlready = true;
+                die();
+            }
         }else{
             shieldDown = true;
             shieldCooldownOver = Time.time + shieldCooldown;            
@@ -210,7 +220,8 @@ public class player_controller : MonoBehaviour
     }
 
     private void die(){
-        print("you die");
+        Time.timeScale = 0f;
+        dieScreen.SetActive(true);
     }
 
     private void HandleCharacterAbility(){

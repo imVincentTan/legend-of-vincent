@@ -5,6 +5,7 @@ using UnityEngine;
 public class PauseMenuController : MonoBehaviour
 {
     public bool gamePaused = false;
+    public bool gameOver = false;
 
     public GameObject pauseMenu;
 
@@ -17,13 +18,15 @@ public class PauseMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Pause")){
-            if (gamePaused){
-                // print("resume game!");
-                resumeGame();
-            }else{
-                // print("pause game!");
-                pauseGame();
+        if(!gameOver){
+            if (Input.GetButtonDown("Pause")){
+                if (gamePaused){
+                    // print("resume game!");
+                    resumeGame();
+                }else{
+                    // print("pause game!");
+                    pauseGame();
+                }
             }
         }
     }

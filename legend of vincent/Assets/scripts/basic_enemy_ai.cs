@@ -27,6 +27,8 @@ public class basic_enemy_ai : MonoBehaviour
     // stats
     public float attackPower = 5f;
 
+    // misc
+    private int failcount = 0;
     
 
     // Start is called before the first frame update
@@ -56,7 +58,6 @@ public class basic_enemy_ai : MonoBehaviour
                 Patrolling();
             }    
         }catch{
-            print("does it ever go here? find out next time on...");
             Destroy(gameObject);
         }
 
@@ -66,12 +67,22 @@ public class basic_enemy_ai : MonoBehaviour
     private void Patrolling(){
         
         if(!destinationPointSet) GetDestinationPoint();
-        if(destinationPointSet) agent.SetDestination(destinationPoint);
+        if(destinationPointSet){
+            if(failcount > 3){
+                Destroy(gameObject);
+            }
+            if(!agent.SetDestination(destinationPoint)){
+                failcount += 1;
+                GetDestinationPoint();
+            }else{
+                failcount = 0;
+            }
+        }
+        
 
         Vector3 distanceToDestinationPoint = destinationPoint - transform.position;
 
         if (distanceToDestinationPoint.magnitude < 1f) destinationPointSet = false;
-
     }
 
     private void GetDestinationPoint(){

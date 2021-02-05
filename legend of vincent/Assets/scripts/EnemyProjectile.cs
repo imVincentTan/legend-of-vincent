@@ -19,6 +19,7 @@ public class EnemyProjectile : MonoBehaviour
 
     public float attackPower;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,14 +40,21 @@ public class EnemyProjectile : MonoBehaviour
             // gameObject.transform.Translate(-gameObject.transform.forward * Time.deltaTime * projectileSpeed);
             gameObject.transform.position += gameObject.transform.forward * Time.deltaTime * projectileSpeed;
             
-            if ((gameObject.transform.position - player.position).magnitude < 0.5f){
-                playerHealth.takeDamage(attackPower);
-                Destroy(gameObject);
-            }else if((gameObject.transform.position - endPosition.position).magnitude < 0.5f){
+            // if ((gameObject.transform.position - player.position).magnitude < hitboxCheck){
+            //     playerHealth.takeDamage(attackPower);
+            //     Destroy(gameObject);
+            // }else 
+
+            if((gameObject.transform.position - endPosition.position).magnitude < 0.5f){
                 Destroy(gameObject);
             }
             
         }
+    }
+
+    public void hurtPlayer(){
+        playerHealth.takeDamage(attackPower);
+        Destroy(gameObject);
     }
 
     public void setStraightProjectile(float pSpeed, Transform sPos, Transform ePos, float damage){

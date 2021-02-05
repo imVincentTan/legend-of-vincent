@@ -29,10 +29,13 @@ MonoBehaviour:
   enemyContainer: {fileID: 2444839206578082725}
   explosionPrefab: {fileID: 4168765202759942638, guid: 4520bab5cf473054b82b47dc798b48b7,
     type: 3}
+  winGameDialogue: {fileID: 0}
   canvas: {fileID: 4742562425340737036}
   slider: {fileID: 7464682687229092006}
+  isFinalBoss: 0
   maxHealth: 30
   health: 30
+  pauseMenuController: {fileID: 0}
 --- !u!1 &2444839206578082725
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +97,7 @@ MonoBehaviour:
   attackCooldownFinish: 0
   bulletPrefab: {fileID: 2646636999354392499, guid: 3655c5260043b53498c6d4de17fa45d1,
     type: 3}
-  projectileSpeed: 5
+  projectileSpeed: 10
   sightRange: 100
   attackRange: 20
   playerInSightRange: 0
@@ -102,6 +105,9 @@ MonoBehaviour:
   attackPower: 3
   minHeight: 3
   maxHeight: 5
+  audioSource: {fileID: 7153952321296000974}
+  chickenSound0: {fileID: 8300000, guid: 1141699933192974897d52c0c92011e9, type: 3}
+  chickenSound1: {fileID: 8300000, guid: 58a02077ebf9bfd4f8d42789b25eb3f7, type: 3}
 --- !u!195 &2444839206578082727
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -136,7 +142,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.69
   m_Pitch: 1
   Loop: 0
   Mute: 0

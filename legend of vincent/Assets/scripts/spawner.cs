@@ -9,6 +9,8 @@ public class spawner : MonoBehaviour
     public GameObject bigCupcakePrefab;
     public GameObject smallChickenPrefab;
     public GameObject bigChickenPrefab;
+    public GameObject smallChiliPrefab;
+    public GameObject bigChiliPrefab;
 
     // spawner area
     private float centerx = 500f;
@@ -28,7 +30,7 @@ public class spawner : MonoBehaviour
     private Vector3 tempOrigin;
 
     // spawnrate managing
-    public float maxNumberOfEnemies = 100f;
+    public float maxNumberOfEnemies = 200f;
     private float lastEnemySpawnTime = 0f;
     public float newEnemySpawnTime = 10f;
     private float numberOfEnemies = 0;
@@ -38,10 +40,22 @@ public class spawner : MonoBehaviour
     {
         // initial enemies
         for (int a = 0; a < maxNumberOfEnemies; a++){
-            do{
+            spawnEnemy();
+        }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void spawnEnemy(){
+        do{
                 genAngle = Random.Range(0f, 360f);
                 genDistance = Random.Range(0f,radius);
-                genEnemyType = Random.Range(0,4);
+                genEnemyType = Random.Range(0,6);
 
                 spawnPointx = Mathf.Cos(genAngle) * genDistance;
                 spawnPointy = Mathf.Sin(genAngle) * genDistance;
@@ -56,25 +70,10 @@ public class spawner : MonoBehaviour
                 Instantiate(smallChickenPrefab, new Vector3(centerx + spawnPointx, 199.5f - hitInfo.distance, centery + spawnPointy), Quaternion.identity);
             }else if (genEnemyType == 3){
                 Instantiate(bigChickenPrefab, new Vector3(centerx + spawnPointx, 199.5f - hitInfo.distance, centery + spawnPointy), Quaternion.identity);
+            }else if (genEnemyType == 4){
+                Instantiate(smallChiliPrefab, new Vector3(centerx + spawnPointx, 199.5f - hitInfo.distance, centery + spawnPointy), Quaternion.identity);
+            }else if (genEnemyType == 5){
+                Instantiate(bigChiliPrefab, new Vector3(centerx + spawnPointx, 199.5f - hitInfo.distance, centery + spawnPointy), Quaternion.identity);
             }
-            
-
-        }
-
-
-        // print("SPAWN START!");
-        // float tempx = 734;
-        // float tempy = 283;
-        // Vector3 tempOrigin = new Vector3(tempx,200,tempy);
-
-        // Physics.Raycast(tempOrigin, -transform.up, out hitInfo, 200f, groundLayerMask);
-
-        // Instantiate(bigCupcakePrefab, new Vector3(tempx, 199.5f - hitInfo.distance, tempy), Quaternion.identity);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

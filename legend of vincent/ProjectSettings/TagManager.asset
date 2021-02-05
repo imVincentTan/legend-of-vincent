@@ -16,8 +16,8 @@ TagManager:
   - player
   - enemy
   - world
-  - 
-  - 
+  - projectile
+  - playerHitbox
   - 
   - 
   - 

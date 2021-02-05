@@ -20,10 +20,8 @@ public class explosion : MonoBehaviour
 
         int temp = Random.Range(0,2);
         if(temp == 0){
-            print("boom");
             audioSource.PlayOneShot(boomSound);
         }else if(temp == 1){
-            print("duang");
             audioSource.PlayOneShot(duangSound);
         }
     }

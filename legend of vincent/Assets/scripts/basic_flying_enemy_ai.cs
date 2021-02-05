@@ -32,6 +32,11 @@ public class basic_flying_enemy_ai : MonoBehaviour
     public float minHeight = 3f;
     public float maxHeight = 5f; 
 
+    // audio
+    public AudioSource audioSource;
+    public AudioClip chickenSound0;
+    public AudioClip chickenSound1;
+
     // misc
     private int failcount = 0;
 
@@ -67,7 +72,6 @@ public class basic_flying_enemy_ai : MonoBehaviour
         if(!destinationPointSet) GetDestinationPoint();
         if(destinationPointSet){
             if(failcount > 3){
-                print("boop bad object terminated");
                 Destroy(gameObject);
             }
             if(!agent.SetDestination(destinationPoint)){
@@ -108,11 +112,13 @@ public class basic_flying_enemy_ai : MonoBehaviour
         
         if(canAttack){
             
-            // attack
 
-            // agent.SetDestination(transform.position);
-            // transform.LookAt(player);
-            print("chicken attack!!!");
+            int temp = Random.Range(0,2);
+            if(temp == 0){
+                audioSource.PlayOneShot(chickenSound0);
+            }else if(temp == 1){
+                audioSource.PlayOneShot(chickenSound1);
+            }
             
             GameObject chickenBullet = Instantiate(bulletPrefab, new Vector3(0,0,0), Quaternion.identity);
             
